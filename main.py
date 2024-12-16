@@ -67,6 +67,12 @@ if uploaded_file is not None:
         st.error("Unsupported file type. Please upload a TXT, PDF, or CSV file.")
         st.stop()
 
+    #add chuck sliders
+    chunk_size = st.slider("Chunk Size", min_value=500, max_value=5000, value=1000, step=500)
+    chunk_overlap = st.slider("Chunk Overlap", min_value=0, max_value=500, value=200, step=50)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+
+
     # Validate file input length
     if len(file_input.split(" ")) > 20000:
         st.write("Please enter a shorter file. The maximum length is 20,000 words.")
